@@ -1,9 +1,10 @@
-export const log = content => {
-    console.log(content)
+export const log = (param1, param2) => {
+    (param2) ? console.log(param1, param2) : console.log(param1)
 }
 
 // formats string to proper case. Ex. properCase('reAdMe'), //Readme 
 export const properCase = string => {
+
     return `${string[0].toUpperCase()}${string.slice(1).toLowerCase()}`;
 }
 
@@ -16,7 +17,7 @@ export const select = (selector, scope = document) => {
 
 // querySelectorAll with scope. Ex1. selectAll('div') //document.querySelectorAll('div') 
 export const selectAll = (selector, scope = document) => {
-    return [...scope.querySelectorAll(selector) ];
+    return [...scope.querySelectorAll(selector)];
 }
 
 // addEventListener wrapper
@@ -26,11 +27,11 @@ export const listen = (target, event, callback, capture = false) => {
 }
 
 // Global event listener
-export const globalListen = ( type, selector, callback, options, scope = document ) => {
+export const globalListen = (type, selector, callback, options, scope = document) => {
     scope.addEventListener(type, event => {
         if (event.target.matches(selector)) callback(event)
     },
-    options
+        options
     )
 }
 
@@ -93,13 +94,13 @@ export const sleep = (duration) => {
 
 // Get first (n) elements from array
 export const first = (array, numOfElements = 1) => {
-    if (numOfElements === 1 ) return array[0]
+    if (numOfElements === 1) return array[0]
     return array.filter((_, index) => index < numOfElements)
 }
 
 // Get last (n) elements from array
 export const last = (array, numOfElements = 1) => {
-    if (numOfElements === 1 ) return array[array.length - 1]
+    if (numOfElements === 1) return array[array.length - 1]
     return array.filter((_, index) => array.length - index <= numOfElements)
 }
 
@@ -119,8 +120,7 @@ export const pluck = (array, key) => {
 export const groupBy = (array, key) => {
     return array.reduce((group, element) => {
         const keyValue = element[key];
-        return { ...group, [keyValue]: [...(group[keyValue] ?? []), element]}
+        return { ...group, [keyValue]: [...(group[keyValue] ?? []), element] }
     }, {})
 }
 
-console.log(groupBy([{age: 18}, {age: 19}, {age: 18}, {age: 24}, {age: 24}], 'age'))
